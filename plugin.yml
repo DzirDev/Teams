@@ -1,0 +1,9 @@
+name: LegendStrifes
+version: 1.0
+author: Goodwilled
+main: me.goodwilled.legendstrifes.Main
+api-version: 1.16
+commands:
+  legends:
+    usage: /<command>
+    description: Plugin command.
