@@ -22,46 +22,48 @@ public class Commands implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        String prefix = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_RED + "Legends" + ChatColor.DARK_GRAY + "] ";
+        String prefix = ChatColor.DARK_GRAY + "[" + ChatColor.DARK_RED + "legends" + ChatColor.DARK_GRAY + "] ";
         Player p = (Player) sender;
-
+        if(cmd.getLabel().equalsIgnoreCase("legends")){
+            p.openInventory(legendsGUI());
+        }
         return true;
     } // onCommand
 
     public static Inventory legendsGUI(){
-        Inventory inv = Bukkit.createInventory(null, 27, "Legends");
-        ItemStack undead = new ItemStack(Material.DIAMOND_BOOTS, 1);
-        ItemStack ninjas = new ItemStack(Material.ENDER_PEARL, 1);
-        ItemStack warriors = new ItemStack(Material.SHIELD, 1);
-        ItemStack vikings = new ItemStack(Material.DIAMOND_AXE, 1);
-        ItemMeta aMeta = undead.getItemMeta();
-        ItemMeta nMeta = ninjas.getItemMeta();
-        ItemMeta wMeta = warriors.getItemMeta();
-        ItemMeta vMeta = vikings.getItemMeta();
+        Inventory inv = Bukkit.createInventory(null, 27, "legends");
+        ItemStack KNIGHT = new ItemStack(Material.DIAMOND_SWORD, 1);
+        ItemStack MAGE = new ItemStack(Material.ENDER_PEARL, 1);
+        ItemStack TAMER = new ItemStack(Material.COW_SPAWN_EGG, 1);
+        ItemStack ARCHER = new ItemStack(Material.BOW, 1);
+        ItemMeta aMeta = KNIGHT.getItemMeta();
+        ItemMeta nMeta = MAGE.getItemMeta();
+        ItemMeta wMeta = TAMER.getItemMeta();
+        ItemMeta vMeta = ARCHER.getItemMeta();
         ArrayList<String> aLore = new ArrayList<String>();
         ArrayList<String> nLore = new ArrayList<String>();
         ArrayList<String> vLore = new ArrayList<String>();
         ArrayList<String> wLore = new ArrayList<String>();
-        aMeta.setDisplayName(ChatColor.BLUE + "Undead");
-        nMeta.setDisplayName(ChatColor.DARK_GREEN + "Ninjas");
-        wMeta.setDisplayName(ChatColor.DARK_RED + "Wizards");
-        vMeta.setDisplayName(ChatColor.GOLD + "Vikings");
-        aLore.add("Jump higher when in combat.");
-        nLore.add( "Run faster when in combat.");
-        vLore.add("Deal more damage when in combat.");
-        wLore.add("Take less damage when in combat.");
+        aMeta.setDisplayName(ChatColor.BLUE + "KNIGHT");
+        nMeta.setDisplayName(ChatColor.DARK_GREEN + "MAGE");
+        wMeta.setDisplayName(ChatColor.DARK_RED + "TAMER");
+        vMeta.setDisplayName(ChatColor.GOLD + "ARCHER");
+        aLore.add("Ability to craft swords.");
+        nLore.add( "Magic.");
+        vLore.add("Animal army!");
+        wLore.add("Shoot like a Skeleton.");
         aMeta.setLore(aLore);
         nMeta.setLore(nLore);
         wMeta.setLore(wLore);
         vMeta.setLore(vLore);
-        undead.setItemMeta(aMeta);
-        vikings.setItemMeta(vMeta);
-        ninjas.setItemMeta(nMeta);
-        warriors.setItemMeta(wMeta);
-        inv.setItem(10, undead);
-        inv.setItem(12, ninjas);
-        inv.setItem(14, warriors);
-        inv.setItem(16, vikings);
+        KNIGHT.setItemMeta(aMeta);
+        ARCHER.setItemMeta(vMeta);
+        MAGE.setItemMeta(nMeta);
+        TAMER.setItemMeta(wMeta);
+        inv.setItem(10, KNIGHT);
+        inv.setItem(12, MAGE);
+        inv.setItem(14, TAMER);
+        inv.setItem(16, ARCHER);
         return inv;
     }
 

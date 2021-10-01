@@ -4,7 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 public class PlayerInConfig {
-    Legend legend;
+    Team team;
     Main main;
 
     public static Player player(Player p){
@@ -12,7 +12,7 @@ public class PlayerInConfig {
     }
 
    public void configString(Player plr){
-        main.getLegends().legendscfg.getString(player(plr).getUniqueId().toString());
+        main.getlegends().legendscfg.getString(player(plr).getUniqueId().toString());
    }
 
 }

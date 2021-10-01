@@ -5,7 +5,7 @@
       <element id="file-copy" path="$PROJECT_DIR$/config.yml" />
       <element id="file-copy" path="$PROJECT_DIR$/plugin.yml" />
       <element id="file-copy" path="$PROJECT_DIR$/legends.yml" />
-      <element id="module-output" name="LegendStrifes" />
+      <element id="module-output" name="Teams" />
     </root>
   </artifact>
 </component>

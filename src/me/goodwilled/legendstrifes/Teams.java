@@ -8,9 +8,9 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.File;
 import java.io.IOException;
 
-public class Legends {
+public class Teams {
     private Main main;
-    public Legends(Main main){ this.main = main; }
+    public Teams(Main main){ this.main = main; }
 
     public FileConfiguration legendscfg;
     public File legendsfile;
@@ -25,12 +25,12 @@ public class Legends {
         if(!legendsfile.exists()) {
             try {
                 legendsfile.createNewFile();
-                Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "CREATED LEGENDS.YML FILE");
+                Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "CREATED legends.YML FILE");
             } catch(IOException e) {
-                Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.DARK_RED + "COULD NOT CREATE LEGENDS.YML FILE");
+                Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.DARK_RED + "COULD NOT CREATE legends.YML FILE");
             }
         } else {
-            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "LOADED LEGENDS.YML FILE");
+            Bukkit.getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "LOADED legends.YML FILE");
         }
 
         legendscfg = YamlConfiguration.loadConfiguration(legendsfile);

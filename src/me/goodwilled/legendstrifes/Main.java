@@ -1,64 +1,51 @@
 package me.goodwilled.legendstrifes;
 
+import net.luckperms.api.LuckPerms;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
 
 public class Main extends JavaPlugin {
 
-    private static Legends legends;
-    public static Legends getLegends(){
-        return legends;
+    private static Teams teams;
+    public static Teams getlegends(){
+        return teams;
     }
-    private int currentTeam = 0;
+    private int currentlegend = 0;
 
     @Override
     public void onEnable(){
-        legends = new Legends(this);
-        legends.setup();
-        for(Player p : Bukkit.getServer().getOnlinePlayers()){
-            String teamName = getLegends().legendscfg.getString(p.getUniqueId().toString());
-            if(teamName != null) {
-                if (teamName.equals("UNDEAD")) {
-                    getServer().getScheduler().runTaskLaterAsynchronously(this, () -> p.setPlayerListName(ChatColor.BLUE + "Undead: " + ChatColor.WHITE + p.getName()), 1L);
-                }
-
-                if (teamName.equals("NINJA")) {
-                    getServer().getScheduler().runTaskLaterAsynchronously(this, () -> p.setPlayerListName(ChatColor.DARK_GREEN + "Ninja: " + ChatColor.WHITE + p.getName()), 1L);
-                }
-
-                if (teamName.equals("WIZARD")) {
-                    getServer().getScheduler().runTaskLaterAsynchronously(this, () -> p.setPlayerListName(ChatColor.DARK_RED + "Wizard: " + ChatColor.WHITE + p.getName()), 1L);
-                }
-
-                if (teamName.equals("VIKING")) {
-                    getServer().getScheduler().runTaskLaterAsynchronously(this, () -> p.setPlayerListName(ChatColor.GOLD + "Viking: " + ChatColor.WHITE + p.getName()), 1L);
-                }
-            }
-        }
+        teams = new Teams(this);
+        teams.setup();
         getServer().getConsoleSender().sendMessage("legends v1.0 has been enabled.");
         createConfig();
         getConfig().options().copyDefaults(true);
         Commands cmd = new Commands(this);
         Events events = new Events(this);
-        NightBurn nightBurn = new NightBurn(this);
         getCommand("legends").setExecutor(cmd);
         getServer().getPluginManager().registerEvents(events, this);
-        getServer().getPluginManager().registerEvents(events, this);
         events.setScores();
-        nightBurn.nightBurn();
 
         for(Player online: Bukkit.getOnlinePlayers()){
             online.setScoreboard(events.sb);
         }
     }
 
+    public LuckPerms getAPI(){
+        RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
+        if (provider != null) {
+            LuckPerms api = provider.getProvider();
+        }
+        return provider.getProvider();
+    }
+
     @Override
     public void onDisable(){
-        getServer().getConsoleSender().sendMessage("LegendStrifes v1.0 has been disabled.");
+        getServer().getConsoleSender().sendMessage("legendstrifes v1.0 has been disabled.");
     }
 
     private void createConfig() {
@@ -70,7 +57,7 @@ public class Main extends JavaPlugin {
             if (!file.exists()) {
                 getLogger().info("Config.yml not found, creating!");
                 saveDefaultConfig();
-                getConfig().set("prefix", "&8[&4Legends&8] ");
+                getConfig().set("prefix", "&8[&4legends&8] ");
             } else {
                 getLogger().info("Config.yml found, loading!");
             }
